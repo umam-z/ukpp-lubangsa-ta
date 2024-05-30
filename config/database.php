@@ -5,7 +5,7 @@ function getDatabaseConfig(): array
     return [
         "database" => [
             "test" => [
-                "url" => "mysql:host=localhost:3306;dbname=ukpp_lubangsa_test",
+                "url" => "mysql:host=localhost:3306;dbname=ukpp_test",
                 "username" => "root",
                 "password" => "admin"
             ],
