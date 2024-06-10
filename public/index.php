@@ -3,6 +3,7 @@
 use UmamZ\UkppLubangsa\App\Router;
 use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Controller\HomeController;
+use UmamZ\UkppLubangsa\Controller\LaporanController;
 use UmamZ\UkppLubangsa\Controller\ObatController;
 use UmamZ\UkppLubangsa\Controller\PasienController;
 use UmamZ\UkppLubangsa\Controller\PemeriksaanController;
@@ -62,5 +63,8 @@ Router::add('GET', '/periksa/([0-9]*)/obat', PemeriksaanObatController::class, '
 Router::add('POST', '/periksa/([0-9]*)/delete', PemeriksaanObatController::class, 'delete', [MustLoginMiddleware::class]);
 Router::add('POST', '/periksa/([0-9]*)/obat/([0-9]*)/pasien', PemeriksaanObatController::class, 'addPemeriksaanObat', [MustLoginMiddleware::class]);
 Router::add('POST', '/periksa/([0-9]*)/obat/([0-9]*)/delete', PemeriksaanObatController::class, 'delete', [MustLoginMiddleware::class]);
+
+# Laporan Controller
+Router::add('GET', '/laporan', LaporanController::class, 'laporan',[MustLoginMiddleware::class]);
 
 Router::run();
