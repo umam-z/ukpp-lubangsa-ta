@@ -30,11 +30,12 @@ class PendidikanService
     {
         ValidationUtil::validate($request);
 
-        $pendidikan = new Pendidikan;
-        $pendidikan->id = mt_rand();
-        $pendidikan->lembaga = $request->lembaga;
-        $pendidikan->email = $request->email;
-        $pendidikan->staff = $request->staff;
+        $pendidikan = new Pendidikan(
+            mt_rand(),
+            $request->lembaga,
+            $request->email,
+            $request->staff
+        );
         try {
             Database::beginTransaction();
 

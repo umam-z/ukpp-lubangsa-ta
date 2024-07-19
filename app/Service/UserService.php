@@ -32,10 +32,11 @@ class UserService
                 throw new ValidationException("Username already exists");
             }
 
-            $user = new User();
-            $user->id = mt_rand();
-            $user->nama = $request->username;
-            $user->password = password_hash($request->password, PASSWORD_BCRYPT);
+            $user = new User(
+                mt_rand(),
+                $request->username,
+                password_hash($request->password, PASSWORD_BCRYPT)
+            );
 
             $this->userRepository->save($user);
 
@@ -59,7 +60,7 @@ class UserService
             throw new ValidationException("Username or password is wrong");
         }
 
-        if (password_verify($request->password, $user->password)) {
+        if (password_verify($request->password, $user->getPassword())) {
             $response = new UserLoginResponse();
             $response->user = $user;
             return $response;

@@ -18,13 +18,13 @@ class AlamatRepository
     {
         $statement = $this->connection->prepare('INSERT INTO alamat (alamat_id, kabupaten, kecamatan, desa, blok, no, pasien_id) VALUES (?, ?, ?, ?, ?, ?, ?)');
         $statement->execute([
-            $alamat->id,
-            $alamat->kabupaten, 
-            $alamat->kecamatan,
-            $alamat->desa,
-            $alamat->blok,
-            $alamat->no,
-            $alamat->pasienId
+            $alamat->getId(),
+            $alamat->getKabupaten(), 
+            $alamat->getKecamatan(),
+            $alamat->getDesa(),
+            $alamat->getBlok(),
+            $alamat->getNo(),
+            $alamat->getPasienId()
         ]);
         
         return $alamat;
@@ -37,15 +37,15 @@ class AlamatRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $alamat = new Alamat;
-                $alamat->id = $row['alamat_id'];
-                $alamat->kabupaten = $row['kabupaten'];
-                $alamat->kecamatan = $row['kecamatan'];
-                $alamat->desa = $row['desa'];
-                $alamat->blok = $row['blok'];
-                $alamat->no = $row['no'];
-                $alamat->pasienId = $row['pasien_id'];
-                
+                $alamat = new Alamat(
+                    $row['alamat_id'],
+                    $row['kabupaten'],
+                    $row['kecamatan'],
+                    $row['desa'],
+                    $row['blok'],
+                    $row['no'],
+                    $row['pasien_id']
+                );
                 return $alamat;
             } else {
                 return null;
@@ -62,15 +62,15 @@ class AlamatRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $alamat = new Alamat;
-                $alamat->id = $row['alamat_id'];
-                $alamat->kabupaten = $row['kabupaten'];
-                $alamat->kecamatan = $row['kecamatan'];
-                $alamat->desa = $row['desa'];
-                $alamat->blok = $row['blok'];
-                $alamat->no = $row['no'];
-                $alamat->pasienId = $row['pasien_id'];
-                
+                $alamat = new Alamat(
+                    $row['alamat_id'],
+                    $row['kabupaten'],
+                    $row['kecamatan'],
+                    $row['desa'],
+                    $row['blok'],
+                    $row['no'],
+                    $row['pasien_id']
+                );
                 return $alamat;
             } else {
                 return null;

@@ -139,18 +139,18 @@
                   <tbody>
                     <?php  foreach ($model['data'] as $key => $value) { ?>
                       <tr>
-                        <td><?php echo $value->id; ?></td>
-                        <td><?php echo $value->obat; ?></td>
-                        <td><?php echo $value->stock; ?></td>
+                        <td><?php echo $value->getId(); ?></td>
+                        <td><?php echo $value->getObat(); ?></td>
+                        <td><?php echo $value->getStock(); ?></td>
                         <td>
                           <div class="btn-group">
-                              <form action="/obat/<?php  echo $value->id ?>/delete" method="post" style="margin: 5px;">
+                              <form action="/obat/<?php  echo $value->getId() ?>/delete" method="post" style="margin: 5px;">
                                 <button type="submit" class="btn btn-danger btn-sm">
                                   <i class="far fa-trash-alt"></i>
                                 </button>
                               </form>
                               <div style="margin: 5px;">
-                                <a  href="/obat/<?php  echo $value->id ?>/stock" class="btn btn-info btn-sm" >
+                                <a  href="/obat/<?php  echo $value->getId() ?>/stock" class="btn btn-info btn-sm" >
                                   <i class="fas fa-edit"></i>
                                 </a>
                               </div>

@@ -16,7 +16,7 @@ class UserRepository
     public function save(User $user) : User
     {
         $statement = $this->connection->prepare('INSERT INTO users(user_id, username, password) VALUES (?, ?, ?)');
-        $statement->execute([$user->id, $user->nama, $user->password]);
+        $statement->execute([$user->getId(), $user->getNama(), $user->getPassword()]);
         return $user;
     }
 
@@ -28,11 +28,11 @@ class UserRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $user = new User;
-                $user->id = $row['user_id'];
-                $user->nama = $row['username'];
-                $user->password = $row['password'];
-                
+                $user = new User(
+                    $row['user_id'],
+                    $row['username'],
+                    $row['password']
+                );
                 return $user;
             } else {
                 return null;
@@ -49,10 +49,11 @@ class UserRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $user = new User;
-                $user->id = $row['user_id'];
-                $user->nama = $row['username'];
-                $user->password = $row['password'];
+                $user = new User(
+                    $row['user_id'],
+                    $row['username'],
+                    $row['password']
+                );
                 
                 return $user;
             } else {

@@ -171,23 +171,23 @@
           <div class="card ">
               <div class="card-body box-profile">
 
-                <h3 class="profile-username text-center"><?= $value->lembaga; ?></h3>
+                <h3 class="profile-username text-center"><?= $value->getLembaga(); ?></h3>
 
                 <p class="text-muted text-center">Keterangan</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Kode</b> <a class="float-right"><?= $value->id; ?></a>
+                    <b>Kode</b> <a class="float-right"><?= $value->getId(); ?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Staff</b> <a class="float-right"><?= $value->staff; ?></a>
+                    <b>Staff</b> <a class="float-right"><?= $value->getStaff(); ?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Kontak</b> <a class="float-right"><?= $value->email; ?></a>
+                    <b>Kontak</b> <a class="float-right"><?= $value->getEmail(); ?></a>
                   </li>
                 </ul>
 
-                <form action="/pendidikan/<?= $value->id; ?>/delete" method="post">
+                <form action="/pendidikan/<?= $value->getId(); ?>/delete" method="post">
                 <button class="btn btn-danger btn-block" type="submit">Hapus</button>
                 </form>
               </div>

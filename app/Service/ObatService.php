@@ -26,10 +26,11 @@ class ObatService
     {
         ValidationUtil::validate($request);
 
-        $obat = new Obat;
-        $obat->id = mt_rand();
-        $obat->obat = $request->obat;
-        $obat->stock = $request->stock;
+        $obat = new Obat(
+            mt_rand(),
+            $request->obat,
+            $request->stock
+        );
 
         try {
             Database::beginTransaction();
@@ -57,7 +58,7 @@ class ObatService
                 throw new ValidationException("Obat is not found");
             }
 
-            $obat->stock = $request->stock;
+            $obat->setStock($request->stock);
             $this->obatRepository->update($obat);
 
             $response = new ObatStockUpdateResponse();

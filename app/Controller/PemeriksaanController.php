@@ -61,12 +61,12 @@ class PemeriksaanController
     public function create(string $pasienId): void
     {
         $request = new PemeriksaanAddRequest;
-        $request->diagnos = $_POST['diagnos'];
-        $request->keluhan = $_POST['keluhan'];
-        $request->pasienId = $pasienId;
-        $request->petugasId = $_POST['petugas'];
-        $request->suhu = $_POST['suhu'];
-        $request->tensi = $_POST['tensi'];
+        $request->diagnos = htmlspecialchars($_POST['diagnos']);
+        $request->keluhan = htmlspecialchars($_POST['keluhan']);
+        $request->pasienId = (int)htmlspecialchars($pasienId);
+        $request->petugasId = (int)htmlspecialchars($_POST['petugas']);
+        $request->suhu = (int)htmlspecialchars($_POST['suhu']);
+        $request->tensi = (int)htmlspecialchars($_POST['tensi']);
         try {
             $this->pemeriksaanService->addPemeriksaan($request);
             View::redirect("/pasien/$pasienId/periksa");

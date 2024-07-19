@@ -11,5 +11,14 @@ class LaporanController
         View::render('/Laporan/show-laporan', [
             'title'=> 'Laporan | UKPP'
         ]);
-    }    
+    } 
+    
+    public function postLaporan() : void
+    {
+        try {
+            //code...
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

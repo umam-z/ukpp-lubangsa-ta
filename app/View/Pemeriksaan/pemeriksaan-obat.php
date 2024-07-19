@@ -140,22 +140,22 @@
                   <?php } ?>
                   <div class="form-group">
                     <label for="inputPemeriksaan">Pmemeriksaan No</label>
-                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->id ?>" id="inputPemeriksaan" disabled>
+                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->getId() ?>" id="inputPemeriksaan" disabled>
                   </div>
                   <div class="form-group">
                     <label for="inputKeluhan">Keluhan</label>
-                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->keluhan ?>" id="inputKeluhan" disabled>
+                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->getKeluhan() ?>" id="inputKeluhan" disabled>
                   </div>
                   <div class="form-group">
                     <label for="inputDiagnosa">Diagnosa</label>
-                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->diagnos ?>" id="inputDiagnosa" disabled>
+                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->getDiagnos() ?>" id="inputDiagnosa" disabled>
                   </div>
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
                   <?php if (!empty($model['data']['obatperiksa'])) { ?>
-                    <form action="/pasien/<?= $model['data']['pemeriksaan']->pasienId ?>/surat" method="post" style="margin: 5px;">
+                    <form action="/pasien/<?= $model['data']['pemeriksaan']->getPasienId() ?>/surat" method="post" style="margin: 5px;">
                       <button type="submit" class="btn btn-block btn-primary"><i class="far fa-envelope"></i> Primary</button>
                     </form>
                   <?php } ?>
@@ -221,19 +221,19 @@
             <div class="col-md-3">
           <div class="card card-primary card-outline">
               <div class="card-body box-profile">
-                <h3 class="profile-username text-center"><?= $value->obat; ?></h3>
+                <h3 class="profile-username text-center"><?= $value->getObat(); ?></h3>
 
                 <p class="text-muted text-center">Keterangan</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Kode</b> <a class="float-right"><?= $value->id; ?></a>
+                    <b>Kode</b> <a class="float-right"><?= $value->getId(); ?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Stock</b> <a class="float-right"><?= $value->stock; ?></a>
+                    <b>Stock</b> <a class="float-right"><?= $value->getStock(); ?></a>
                   </li>
                 </ul>
-                <form action="/periksa/<?= $model['data']['pemeriksaan']->id ?>/obat/<?= $value->id; ?>/pasien" method="post">
+                <form action="/periksa/<?= $model['data']['pemeriksaan']->getId() ?>/obat/<?= $value->getId(); ?>/pasien" method="post">
                   <div class="form-group">
                     <label for="inputJumlah">Jumlah</label>
                     <input name="qty" type="number" class="form-control"  id="inputJumlah">

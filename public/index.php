@@ -52,7 +52,6 @@ Router::add('POST', '/pasien', PasienController::class, 'create', [MustLoginMidd
 Router::add('POST', '/pasien/([0-9]*)/delete', PasienController::class, 'delete', [MustLoginMiddleware::class]);
 Router::add('POST', '/pasien/([0-9]*)/surat', PasienController::class, 'surat', [MustLoginMiddleware::class]);
 
-
 # Pemeriksaan Controller
 Router::add('GET', '/pasien/([0-9]*)/periksa', PemeriksaanController::class, 'pemeriksaan', [MustLoginMiddleware::class]);
 Router::add('POST', '/pasien/([0-9]*)/periksa', PemeriksaanController::class, 'create', [MustLoginMiddleware::class]);

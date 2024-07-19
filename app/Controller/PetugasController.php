@@ -32,8 +32,8 @@ class PetugasController
     public function create() : void
     {
         $request = new PetugasAddRequest;
-        $request->kontak = $_POST['kontak'];
-        $request->nama = $_POST['nama'];
+        $request->kontak = htmlspecialchars($_POST['kontak']);
+        $request->nama = htmlspecialchars($_POST['nama']);
         try {
             $this->petugasService->addPetugas($request);
             View::redirect('/petugas');

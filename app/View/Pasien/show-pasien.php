@@ -173,7 +173,7 @@
                           <select name="pendidikan" class="form-control">
                             <option value="" disabled selected>Choose option</option>
                             <?php foreach ($model['data']['pendidikan'] as $key => $value) { ?>
-                              <option value="<?= $value->id; ?>"><?= $value->lembaga; ?></option>
+                              <option value="<?= $value->getId(); ?>"><?= $value->getLembaga(); ?></option>
                             <?php } ?>
                           </select>
                         </div>
@@ -203,7 +203,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example2" class="table table-bordered">
+                <table id="pasien" class="table table-bordered">
                   <thead>
                     <tr>
                       <th>Kode</th>
@@ -291,7 +291,7 @@
 <script src="/assets/dist/js/adminlte.min.js"></script>
 <script>
   $(function () {
-    $('#example2').DataTable({
+    $('#pasien').DataTable({
       "paging": true,
       "lengthChange": false,
       "searching": true,

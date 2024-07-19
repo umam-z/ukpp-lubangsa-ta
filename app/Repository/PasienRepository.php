@@ -18,10 +18,10 @@ class PasienRepository
     {
         $statement = $this->connection->prepare('INSERT INTO pasien(pasien_id, nama, nis, pendidikan_id) VALUES (?, ?, ?, ?)');
         $statement->execute([
-            $pasien->id,
-            $pasien->nama, 
-            $pasien->nis,
-            $pasien->pendidikanId
+            $pasien->getId(),
+            $pasien->getNama(), 
+            $pasien->getNis(),
+            $pasien->getPendidikanId()
         ]);
         
         return $pasien;
@@ -34,11 +34,12 @@ class PasienRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $petugas = new Pasien;
-                $petugas->id = $row['pasien_id'];
-                $petugas->nama = $row['nama'];
-                $petugas->nis = $row['nis'];
-                $petugas->pendidikanId = $row['pendidikan_id'];
+                $petugas = new Pasien(
+                    $row['pasien_id'],
+                    $row['nama'],
+                    $row['nis'],
+                    $row['pendidikan_id']
+                );
                 
                 return $petugas;
             } else {

@@ -169,19 +169,19 @@
             <div class="col-md-3">
           <div class="card card-primary card-outline">
               <div class="card-body box-profile">
-                <h3 class="profile-username text-center"><?= $value->nama; ?></h3>
+                <h3 class="profile-username text-center"><?= $value->getNama(); ?></h3>
 
                 <p class="text-muted text-center">Keterangan</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    <b>Kode</b> <a class="float-right"><?= $value->id; ?></a>
+                    <b>Kode</b> <a class="float-right"><?= $value->getId(); ?></a>
                   </li>
                   <li class="list-group-item">
-                    <b>Kontak</b> <a class="float-right"><?= $value->kontak; ?></a>
+                    <b>Kontak</b> <a class="float-right"><?= $value->getKontak(); ?></a>
                   </li>
                 </ul>
-                <form action="/petugas/<?= $value->id; ?>/delete" method="post">
+                <form action="/petugas/<?= $value->getId(); ?>/delete" method="post">
                   <button class="btn btn-danger btn-block" type="submit">Hapus</button>
                 </form>
                 <!-- <a href="#" class="btn btn-danger btn-block"><b>Hapus</b></a> -->

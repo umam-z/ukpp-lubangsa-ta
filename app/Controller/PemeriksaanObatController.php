@@ -56,9 +56,9 @@ class PemeriksaanObatController{
     public function addPemeriksaanObat(string $pemeriksaanId, string $obatId): void
     {
         $request = new PemeriksaanObatAddRequest;
-        $request->obatId = $obatId;
-        $request->pemeriksaanId = $pemeriksaanId;
-        $request->qty = (int)$_POST['qty'];
+        $request->obatId = (int)htmlspecialchars($obatId);
+        $request->pemeriksaanId = (int)htmlspecialchars($pemeriksaanId);
+        $request->qty = (int)htmlspecialchars($_POST['qty']);
         try {
             $this->pemeriksaanObatService->addObatPemeriksaan($request);
             View::redirect("/periksa/$pemeriksaanId/obat");

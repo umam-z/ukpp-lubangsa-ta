@@ -31,15 +31,16 @@ class PasienService
     {
       ValidationUtil::validate($request);
       
-      $pasien = new Pasien;
-      $pasien->id = mt_rand();
-      $pasien->nama = $request->nama;
-      $pasien->nis = $request->nis;
-      $pasien->pendidikanId = $request->pedidikanId;
-
+      $pasien = new Pasien(
+        mt_rand(),
+        $request->nama,
+        $request->nis,
+        $request->pedidikanId
+      );
+      
       try {
           Database::beginTransaction();
-          $result = $this->pasienRepository->findById($pasien->id);
+          $result = $this->pasienRepository->findById($pasien->getId());
           if ($result != null) {
               throw new ValidationException("Terjadi Kesalahan");
           }

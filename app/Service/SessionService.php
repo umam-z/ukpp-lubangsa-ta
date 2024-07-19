@@ -20,14 +20,15 @@ class SessionService
     }
 
    
-    function create(string $userId) : Session {
-        $session = new Session();
-        $session->id = uniqid();
-        $session->userId = $userId;
+    function create(int $userId) : Session {
+        $session = new Session(
+            uniqid(),
+            $userId
+        );
 
         $this->sessionRepository->save($session);
 
-        setcookie(self::$COOKIE_NAME, $session->id, time() + (60 * 60 * 24 * 30), "/");
+        setcookie(self::$COOKIE_NAME, $session->getId(), time() + (60 * 60 * 24 * 30), "/");
 
         return $session;
     }
@@ -48,7 +49,7 @@ class SessionService
             return null;
         }
 
-        return $this->userRepository->findById($session->userId);
+        return $this->userRepository->findById($session->getUserId());
     }
 
 }

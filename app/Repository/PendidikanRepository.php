@@ -16,7 +16,7 @@ class PendidikanRepository
     public function save(Pendidikan $pendidikan) : Pendidikan
     {
         $statement = $this->connection->prepare('INSERT INTO pendidikan(pendidikan_id, lembaga, email, staff) VALUES (?, ?, ?, ?)');
-        $statement->execute([$pendidikan->id, $pendidikan->lembaga, $pendidikan->email, $pendidikan->staff]);
+        $statement->execute([$pendidikan->getId(), $pendidikan->getLembaga(), $pendidikan->getEmail(), $pendidikan->getStaff()]);
         return $pendidikan;
     }
 
@@ -27,11 +27,12 @@ class PendidikanRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $pendidikan = new Pendidikan;
-                $pendidikan->id = $row['pendidikan_id'];
-                $pendidikan->lembaga = $row['lembaga'];
-                $pendidikan->email = $row['email'];
-                $pendidikan->staff = $row['staff'];
+                $pendidikan = new Pendidikan(
+                    $row['pendidikan_id'],
+                    $row['lembaga'],
+                    $row['email'],
+                    $row['staff']
+                );
                 
                 return $pendidikan;
             } else {
@@ -57,11 +58,12 @@ class PendidikanRepository
 
         foreach ($statement as $row) {
 
-            $pendidikan = new Pendidikan;
-            $pendidikan->id = $row['pendidikan_id'];
-            $pendidikan->lembaga = $row['lembaga'];
-            $pendidikan->email = $row['email'];
-            $pendidikan->staff = $row['staff'];
+            $pendidikan = new Pendidikan(
+                $row['pendidikan_id'],
+                $row['lembaga'],
+                $row['email'],
+                $row['staff']
+            );
 
             $result[] = $pendidikan;
         }

@@ -16,7 +16,7 @@ class PetugasRepository
     public function save(Petugas $petugas) : Petugas
     {
         $statement = $this->connection->prepare('INSERT INTO petugas(petugas_id, nama, kontak) VALUES (?, ?, ?)');
-        $statement->execute([$petugas->id, $petugas->nama, $petugas->kontak]);
+        $statement->execute([$petugas->getId(), $petugas->getNama(), $petugas->getKontak()]);
         return $petugas;
     }
 
@@ -28,10 +28,11 @@ class PetugasRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $petugas = new Petugas;
-                $petugas->id = $row['petugas_id'];
-                $petugas->nama = $row['nama'];
-                $petugas->kontak = $row['kontak'];
+                $petugas = new Petugas(
+                    $row['petugas_id'],
+                    $row['nama'],
+                    $row['kontak']
+                );
                 
                 return $petugas;
             } else {
@@ -49,10 +50,11 @@ class PetugasRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $petugas = new Petugas;
-                $petugas->id = $row['petugas_id'];
-                $petugas->nama = $row['nama'];
-                $petugas->kontak = $row['kontak'];
+                $petugas = new Petugas(
+                    $row['petugas_id'],
+                    $row['nama'],
+                    $row['kontak']
+                );
                 
                 return $petugas;
             } else {
@@ -77,12 +79,13 @@ class PetugasRepository
         $result = [];
 
         foreach ($statement as $row) {
-            $alamat = new Petugas();
-            $alamat->id = $row['petugas_id'];
-            $alamat->kontak = $row['kontak'];
-            $alamat->nama = $row['nama'];
+            $petugas = new Petugas(
+                $row['petugas_id'],
+                $row['nama'],
+                $row['kontak']
+            );
 
-            $result[] = $alamat;
+            $result[] = $petugas;
         }
         return $result;
     }

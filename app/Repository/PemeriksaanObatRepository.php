@@ -17,9 +17,9 @@ class PemeriksaanObatRepository
     {
         $statement = $this->connection->prepare('INSERT INTO pemeriksaan_obat (obat_id, pemeriksaan_id, qty) VALUES (?, ?, ?)');
         $statement->execute([
-            $pemeriksaanObat->obatId,
-            $pemeriksaanObat->pemeriksaanId, 
-            $pemeriksaanObat->quantity
+            $pemeriksaanObat->getObatId(),
+            $pemeriksaanObat->getPemeriksaanId(), 
+            $pemeriksaanObat->getQuantity()
         ]);
         
         return $pemeriksaanObat;
@@ -41,11 +41,11 @@ class PemeriksaanObatRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $pemeriksaanObat = new PemeriksaanObat;
-                $pemeriksaanObat->obatId = $row['obat_id'];
-                $pemeriksaanObat->pemeriksaanId = $row['pemeriksaan_id'];
-                $pemeriksaanObat->quantity = $row['qty'];
-                
+                $pemeriksaanObat = new PemeriksaanObat(
+                    $row['pemeriksaan_id'],
+                    $row['obat_id'],
+                    $row['qty']
+                );
                 return $pemeriksaanObat;
             } else {
                 return null;
@@ -67,10 +67,11 @@ class PemeriksaanObatRepository
         $statement->execute([$pemeriksaanId]);
         try {
             if ($row = $statement->fetch()) {
-                $pemeriksaanObat = new PemeriksaanObat;
-                $pemeriksaanObat->obatId = $row['obat_id'];
-                $pemeriksaanObat->pemeriksaanId = $row['pemeriksaan_id'];
-                $pemeriksaanObat->quantity = $row['qty'];
+                $pemeriksaanObat = new PemeriksaanObat(
+                    $row['pemeriksaan_id'],
+                    $row['obat_id'],
+                    $row['qty']
+                );
                 
                 return $pemeriksaanObat;
             } else {

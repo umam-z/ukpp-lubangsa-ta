@@ -26,23 +26,24 @@ class AlamatService
     public function addAlamatPasien(AlamatPasienAddRequest $request) : AlamatPasienAddResponse
     {
         ValidationUtil::validate($request);
-        $alamat = new Alamat;
-        $alamat->id = mt_rand();
-        $alamat->blok = $request->blok;
-        $alamat->no = $request->no;
-        $alamat->kabupaten = $request->kabupaten;
-        $alamat->kecamatan = $request->kecamatan;
-        $alamat->desa = $request->desa;
-        $alamat->pasienId = $request->pasienId;
+        $alamat = new Alamat(
+            mt_rand(),
+            $request->kabupaten,
+            $request->kecamatan,
+            $request->desa,
+            $request->blok,
+            $request->no,
+            $request->pasienId
+        );
 
         try {
             Database::beginTransaction();
-            $result = $this->pasienRepository->findById($alamat->pasienId);
+            $result = $this->pasienRepository->findById($alamat->getPasienId());
             if ($result == null) {
                 throw new ValidationException("Terjadi Kesalahan");
             }
 
-            $result = $this->alamatRepository->findById($alamat->id);
+            $result = $this->alamatRepository->findById($alamat->getId());
             if ($result != null) {
                 throw new ValidationException("Terjadi Kesalahan");
             }
@@ -74,12 +75,12 @@ class AlamatService
                 throw new ValidationException('Terjadi Kesalahan');
             }
             
-            $alamat = $this->alamatRepository->findByPasienId($pasien->id);
+            $alamat = $this->alamatRepository->findByPasienId($pasien->getId());
             if ($alamat == null) {
                 throw new ValidationException('Terjadi Kesalahan');
             }
 
-            $this->alamatRepository->deleteById($alamat->id);
+            $this->alamatRepository->deleteById($alamat->getId());
             Database::commitTransaction();
             return $pasien;
         } catch (\Exception $e) {

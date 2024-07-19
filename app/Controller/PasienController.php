@@ -59,18 +59,18 @@ class PasienController
     public function create() : void
     {
         $request = new PasienAddRequest;
-        $request->nama = $_POST['nama'];
-        $request->nis = $_POST['nis'];
-        $request->pedidikanId = $_POST['pendidikan'] ?? 0 ;
+        $request->nama = htmlspecialchars($_POST['nama']);
+        $request->nis = (int) htmlspecialchars($_POST['nis']);
+        $request->pedidikanId = (int) htmlspecialchars($_POST['pendidikan'] ?? 0);
         try {
             $response = $this->pasienService->addPasien($request);
             $request = new AlamatPasienAddRequest;
-            $request->pasienId = $response->pasien->id;
-            $request->blok = $_POST['blok'];
-            $request->no = $_POST['no'];
-            $request->desa = $_POST['desa'];
-            $request->kecamatan = $_POST['kecamatan'];
-            $request->kabupaten = $_POST['kabupaten'];
+            $request->pasienId = $response->pasien->getId();
+            $request->blok = htmlspecialchars($_POST['blok']);
+            $request->no = (int)htmlspecialchars($_POST['no']);
+            $request->desa = htmlspecialchars($_POST['desa']);
+            $request->kecamatan = htmlspecialchars($_POST['kecamatan']);
+            $request->kabupaten = htmlspecialchars($_POST['kabupaten']);
             $this->alamatService->addAlamatPasien($request);
             View::redirect('/pasien');
         } catch (ValidationException | Exception $e) {
@@ -88,7 +88,7 @@ class PasienController
     public function delete(string $pasienId) : void
     {
         try {
-            $this->pasienService->delete($pasienId);
+            $this->pasienService->delete((int)htmlspecialchars($pasienId));
             View::redirect('/pasien');
         } catch (\Exception $e) {
             View::render('/Pasien/show-pasien', [
@@ -105,7 +105,7 @@ class PasienController
     public function surat(string $pasienId): void
     {
         try {
-            $result = $this->alamatService->dataSurat($pasienId);
+            $result = $this->alamatService->dataSurat((int)htmlspecialchars($pasienId));
             $this->pasienService->sendEmail($result);
             View::redirect('/');
         } catch (ValidationException $e) {

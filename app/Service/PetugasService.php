@@ -30,14 +30,16 @@ class PetugasService
     {
         ValidationUtil::validate($request);
 
-        $petugas = new Petugas;
-        $petugas->id = mt_rand();
-        $petugas->nama = $request->nama;
-        $petugas->kontak = $request->kontak;
+        $petugas = new Petugas(
+            mt_rand(),
+            $request->nama,
+            $request->kontak
+        );
+
         try {
             Database::beginTransaction();
 
-            $result =$this->petugasRepository->findByNama($petugas->nama);
+            $result =$this->petugasRepository->findByNama($petugas->getNama());
             if ($result != null) {
                 throw new ValidationException("Nama Sudah Terpakai");
             }

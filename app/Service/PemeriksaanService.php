@@ -31,7 +31,7 @@ class PemeriksaanService
             throw new ValidationException("Data pasien tidak ditemukan");
         }
 
-        $pemeriksaan = $this->pemeriksaanRepository->getPasienPeriksa($pasien->id);
+        $pemeriksaan = $this->pemeriksaanRepository->getPasienPeriksa($pasien->getId());
 
         return $pemeriksaan;
     }
@@ -42,19 +42,22 @@ class PemeriksaanService
 
         $now = new DateTime();
         $now->setTimezone(new DateTimeZone("Asia/Jakarta"));
+        $tanggal = $now->format("Y-m-d");
 
-        $pemeriksaan = new Pemeriksaan;
-        $pemeriksaan->id = mt_rand();
-        $pemeriksaan->diagnos = $request->diagnos;
-        $pemeriksaan->keluhan = $request->keluhan;
-        $pemeriksaan->pasienId = $request->pasienId;
-        $pemeriksaan->petugasId = $request->petugasId;
-        $pemeriksaan->suhu = $request->suhu;
-        $pemeriksaan->tanggal = $now->format("Y-m-d");
-        $pemeriksaan->tensi = $request->tensi;
+        $pemeriksaan = new Pemeriksaan(
+            mt_rand(),
+            $request->petugasId,
+            $request->pasienId,
+            $request->tensi,
+            $request->suhu,
+            $request->keluhan,
+            $request->diagnos,
+            $tanggal
+        );
+        
         try {
             Database::beginTransaction();
-            $result = $this->pemeriksaanRepository->findById($pemeriksaan->id);
+            $result = $this->pemeriksaanRepository->findById($pemeriksaan->getId());
             if ($result != null) {
                 throw new ValidationException("Terjadi Kesalahan");
             }
@@ -77,7 +80,7 @@ class PemeriksaanService
             if ($pemeriksaan == null) {
                 throw new ValidationException("Terjadi Kesalahan");
             }
-            $this->pemeriksaanRepository->deleteById($pemeriksaan->id);
+            $this->pemeriksaanRepository->deleteById($pemeriksaan->getId());
             Database::commitTransaction();
             return $pemeriksaan;
         } catch (\Exception $e) {

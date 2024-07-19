@@ -32,8 +32,8 @@ class ObatController
     public function create(): void
     {
         $request = new ObatAddRequest;
-        $request->obat = $_POST['obat'];
-        $request->stock = $_POST['stock'];
+        $request->obat = htmlspecialchars($_POST['obat']);
+        $request->stock = (int) htmlspecialchars($_POST['stock']);
         try {
             $this->obatService->addObat($request);
             View::redirect('/obat');
@@ -79,8 +79,8 @@ class ObatController
     public function postUpdateStock (string $obatId) : void
     {
         $request = new ObatStockUpdateRequest;
-        $request->id = $obatId;
-        $request->stock = $_POST['stock'];
+        $request->id = (int) htmlspecialchars($obatId);
+        $request->stock = (int) htmlspecialchars($_POST['stock']);
 
         try {
             $this->obatService->updateStock($request);

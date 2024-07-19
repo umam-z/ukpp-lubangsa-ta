@@ -18,14 +18,14 @@ class PemeriksaanRepository
     {
         $statement = $this->connection->prepare('INSERT INTO pemeriksaan(pemeriksaan_id, diagnos, keluhan, pasien_id, petugas_id, suhu, tanggal, tensi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->execute([
-            $pemeriksaan->id,
-            $pemeriksaan->diagnos,
-            $pemeriksaan->keluhan,
-            $pemeriksaan->pasienId,
-            $pemeriksaan->petugasId,
-            $pemeriksaan->suhu,
-            $pemeriksaan->tanggal,
-            $pemeriksaan->tensi,
+            $pemeriksaan->getId(),
+            $pemeriksaan->getDiagnos(),
+            $pemeriksaan->getKeluhan(),
+            $pemeriksaan->getPasienId(),
+            $pemeriksaan->getPetugasId(),
+            $pemeriksaan->getSuhu(),
+            $pemeriksaan->getTanggal(),
+            $pemeriksaan->getTensi(),
         ]);
         return $pemeriksaan;
     }
@@ -37,15 +37,17 @@ class PemeriksaanRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $pemeriksaan = new Pemeriksaan;
-                $pemeriksaan->id = $row['pemeriksaan_id'];
-                $pemeriksaan->diagnos = $row['diagnos'];
-                $pemeriksaan->keluhan = $row['keluhan'];
-                $pemeriksaan->petugasId = $row['petugas_id'];
-                $pemeriksaan->pasienId = $row['pasien_id'];
-                $pemeriksaan->suhu = $row['suhu'];
-                $pemeriksaan->tanggal = $row['tanggal'];
-                $pemeriksaan->tensi = $row['tensi'];
+                $pemeriksaan = new Pemeriksaan(
+                    $row['pemeriksaan_id'],
+                    $row['petugas_id'],
+                    $row['pasien_id'],
+                    $row['tensi'],
+                    $row['suhu'],
+                    $row['keluhan'],
+                    $row['diagnos'],
+                    $row['tanggal']
+
+                );
                 return $pemeriksaan;
             } else {
                 return null;

@@ -31,9 +31,9 @@ class PendidikanController
     public function create() : void
     {
         $request = new PendidikanAddRequest;
-        $request->staff = $_POST['staff'];
-        $request->email = $_POST['email'];
-        $request->lembaga = $_POST['lembaga'];
+        $request->staff = htmlspecialchars($_POST['staff']);
+        $request->email = htmlspecialchars($_POST['email']);
+        $request->lembaga = htmlspecialchars($_POST['lembaga']);
         
         try {
             $this->pendidikanService->addPetugas($request);

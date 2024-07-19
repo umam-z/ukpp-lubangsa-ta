@@ -16,14 +16,14 @@ class ObatRepository
     public function save(Obat $obat) : Obat
     {
         $statement = $this->connection->prepare('INSERT INTO obat(obat_id, obat, stock) VALUES (?, ?, ?)');
-        $statement->execute([$obat->id, $obat->obat, $obat->stock]);
+        $statement->execute([$obat->getId(), $obat->getObat(), $obat->getStock()]);
         return $obat;
     }
 
     public function update(Obat $obat) : Obat
     {
         $statement = $this->connection->prepare('UPDATE obat SET  obat = ?, stock = ? WHERE obat_id = ?');
-        $statement->execute([$obat->obat, $obat->stock, $obat->id]);
+        $statement->execute([$obat->getObat(), $obat->getStock(), $obat->getId()]);
         return $obat;
     }
 
@@ -34,12 +34,13 @@ class ObatRepository
 
         try {
             if ($row = $statement->fetch()) {
-                $petugas = new Obat;
-                $petugas->id = $row['obat_id'];
-                $petugas->obat = $row['obat'];
-                $petugas->stock = $row['stock'];
+                $obat = new Obat(
+                    $row['obat_id'],
+                    $row['obat'],
+                    $row['stock']
+                );
                 
-                return $petugas;
+                return $obat;
             } else {
                 return null;
             }
@@ -62,10 +63,11 @@ class ObatRepository
         $result = [];
 
         foreach ($statement as $row) {
-            $obat = new Obat();
-            $obat->id = $row['obat_id'];
-            $obat->obat = $row['obat'];
-            $obat->stock = $row['stock'];
+            $obat = new Obat(
+                $row['obat_id'],
+                $row['obat'],
+                $row['stock']
+            );
 
             $result[] = $obat;
         }

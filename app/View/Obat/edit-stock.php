@@ -130,7 +130,7 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form method="post" action="/obat/<?php echo $model['data']->id ?? ''; ?>/stock">
+              <form method="post" action="/obat/<?php echo $model['data']->getId() ?? ''; ?>/stock">
                 <div class="card-body">
                   <?php if (isset($model['error'])) { ?>
                     <div class="alert alert-danger alert-dismissible">
@@ -140,15 +140,15 @@
                   <?php } ?>
                   <div class="form-group">
                     <label for="inputKode">Kode</label>
-                    <input name="kode" type="text" class="form-control" id="inputKode" value="<?php echo $model['data']->id ?? ''; ?>" disabled>
+                    <input name="kode" type="text" class="form-control" id="inputKode" value="<?php echo $model['data']->getId() ?? ''; ?>" disabled>
                   </div>
                   <div class="form-group">
                     <label for="inputObat">Obat</label>
-                    <input name="obat" type="text" class="form-control" id="inputObat" value="<?php echo $model['data']->obat ?? ''; ?>" disabled>
+                    <input name="obat" type="text" class="form-control" id="inputObat" value="<?php echo $model['data']->getObat() ?? ''; ?>" disabled>
                   </div>
                   <div class="form-group">
                     <label for="inputPhoneNumber">Stock</label>
-                    <input name="stock" type="text" class="form-control" id="inputPhoneNumber" value="<?php echo $model['data']->stock ?? ''; ?>">
+                    <input name="stock" type="text" class="form-control" id="inputPhoneNumber" value="<?php echo $model['data']->getStock() ?? ''; ?>">
                   </div>
                 </div>
                 <!-- /.card-body -->

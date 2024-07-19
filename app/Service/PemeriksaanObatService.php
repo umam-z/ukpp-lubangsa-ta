@@ -28,33 +28,34 @@ class PemeriksaanObatService
     public function addObatPemeriksaan(PemeriksaanObatAddRequest $request) : PemeriksaanObatAddResponse
     {
         ValidationUtil::validate($request);
-        $pemeriksaanObat = new PemeriksaanObat;
-        $pemeriksaanObat->obatId = $request->obatId;
-        $pemeriksaanObat->pemeriksaanId = $request->pemeriksaanId;
-        $pemeriksaanObat->quantity = $request->qty;
+        $pemeriksaanObat = new PemeriksaanObat(
+            $request->pemeriksaanId,
+            $request->obatId,
+            $request->qty
+        );
 
         try {
             Database::beginTransaction();
-            $obat = $this->obatRepository->findById($pemeriksaanObat->obatId);
+            $obat = $this->obatRepository->findById($pemeriksaanObat->getObatId());
 
             if ($obat == null) {
                 throw new ValidationException("Terjadi kesalahan");
             }
 
-            if ($obat->obat == 0) {
+            if ($obat->getObat() == 0) {
                 throw new ValidationException("Stock obat tidak mencukupi");
             }
 
-            if ($obat->stock < $pemeriksaanObat->quantity) {
+            if ($obat->getStock() < $pemeriksaanObat->getQuantity()) {
                 throw new ValidationException("Stock obat tidak mencukupi");
             }
 
-            $result = $this->pemeriksaanObatRepository->findByDuplicate($pemeriksaanObat->pemeriksaanId, $pemeriksaanObat->obatId);
+            $result = $this->pemeriksaanObatRepository->findByDuplicate($pemeriksaanObat->getPemeriksaanId(), $pemeriksaanObat->getObatId());
             if ($result != null) {
                 throw new ValidationException("Obat telah digunakan");
             }
 
-            $obat->stock = $obat->stock - $pemeriksaanObat->quantity;
+            $obat->setStock($obat->getStock() - $pemeriksaanObat->getQuantity());
 
             $this->obatRepository->update($obat);
 
@@ -77,7 +78,7 @@ class PemeriksaanObatService
         if ($pemeriksaan == null) {
             throw new ValidationException("Data wajib diisi");
         }
-        $pemeriksaanObat = $this->pemeriksaanObatRepository->getPeriksaObat($pemeriksaan->id);
+        $pemeriksaanObat = $this->pemeriksaanObatRepository->getPeriksaObat($pemeriksaan->getId());
         return $pemeriksaanObat;
     }
 

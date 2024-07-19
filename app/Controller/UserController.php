@@ -34,8 +34,8 @@ class UserController
 
     public function postRegister() : void {
         $request = new UserRegisterRequest;
-        $request->password = $_POST['password'];
-        $request->username = $_POST['username'];
+        $request->password = htmlspecialchars($_POST['password']);
+        $request->username = htmlspecialchars($_POST['username']);
         try {
             $this->userService->register($request);
             View::redirect('/users/login');
@@ -55,12 +55,12 @@ class UserController
 
     public function postLogin(): void {
         $request = new UserLoginRequest;
-        $request->password = $_POST['password'];
-        $request->username = $_POST['username'];
+        $request->password = htmlspecialchars($_POST['password']);
+        $request->username = htmlspecialchars($_POST['username']);
         
         try {
             $response = $this->userService->login($request);
-            $this->sessionService->create($response->user->id);
+            $this->sessionService->create($response->user->getId());
             View::redirect('/');
         } catch (ValidationException $e) {
             View::render('/Home/login', [
