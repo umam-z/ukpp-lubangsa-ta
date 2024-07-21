@@ -7,7 +7,8 @@ use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Exception\ValidationException;
 use UmamZ\UkppLubangsa\Model\ObatAddRequest;
 use UmamZ\UkppLubangsa\Model\ObatStockUpdateRequest;
-use UmamZ\UkppLubangsa\Repository\ObatRepository;
+use UmamZ\UkppLubangsa\Repository\Impl\ObatRepositoryImpl;
+use UmamZ\UkppLubangsa\Service\Impl\ObatServiceImpl;
 use UmamZ\UkppLubangsa\Service\ObatService;
 
 class ObatController
@@ -17,8 +18,8 @@ class ObatController
     public function __construct()
     {
         $connection = Database::getConnection();
-        $obatRepository = new ObatRepository($connection);
-        $this->obatService = new ObatService($obatRepository);
+        $obatRepository = new ObatRepositoryImpl($connection);
+        $this->obatService = new ObatServiceImpl($obatRepository);
     }
 
     public function obat(): void

@@ -4,13 +4,18 @@ namespace UmamZ\UkppLubangsa\Controller;
 
 use UmamZ\UkppLubangsa\App\View;
 use UmamZ\UkppLubangsa\Config\Database;
-use UmamZ\UkppLubangsa\Repository\ObatRepository;
-use UmamZ\UkppLubangsa\Repository\PasienRepository;
-use UmamZ\UkppLubangsa\Repository\PemeriksaanRepository;
-use UmamZ\UkppLubangsa\Repository\PendidikanRepository;
-use UmamZ\UkppLubangsa\Repository\PetugasRepository;
-use UmamZ\UkppLubangsa\Repository\SessionRepository;
-use UmamZ\UkppLubangsa\Repository\UserRepository;
+use UmamZ\UkppLubangsa\Repository\Impl\ObatRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PasienRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PemeriksaanRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PendidikanRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PetugasRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\SessionRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\UserRepositoryImpl;
+use UmamZ\UkppLubangsa\Service\Impl\ObatServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PasienServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PemeriksaanServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PetugasServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\SessionServiceImpl;
 use UmamZ\UkppLubangsa\Service\ObatService;
 use UmamZ\UkppLubangsa\Service\PasienService;
 use UmamZ\UkppLubangsa\Service\PemeriksaanService;
@@ -28,18 +33,18 @@ class HomeController{
     public function __construct()
     {
         $connection = Database::getConnection();
-        $userRepository = new UserRepository($connection);
-        $sessionRepository = new SessionRepository($connection);
-        $pasienRepository = new PasienRepository($connection);
-        $pendidikanRepository = new PendidikanRepository($connection);
-        $pemeriksaanRepository = new PemeriksaanRepository($connection);
-        $petugasRepository = new PetugasRepository($connection);
-        $obatRepository = new ObatRepository($connection);
-        $this->sessionService = new SessionService($sessionRepository, $userRepository);
-        $this->pasienService = new PasienService($pasienRepository, $pendidikanRepository);
-        $this->pemeriksaanService = new PemeriksaanService($pemeriksaanRepository, $pasienRepository);
-        $this->petugasService = new PetugasService($petugasRepository);
-        $this->obatService = new ObatService($obatRepository);
+        $userRepository = new UserRepositoryImpl($connection);
+        $sessionRepository = new SessionRepositoryImpl($connection);
+        $pasienRepository = new PasienRepositoryImpl($connection);
+        $pendidikanRepository = new PendidikanRepositoryImpl($connection);
+        $pemeriksaanRepository = new PemeriksaanRepositoryImpl($connection);
+        $petugasRepository = new PetugasRepositoryImpl($connection);
+        $obatRepository = new ObatRepositoryImpl($connection);
+        $this->sessionService = new SessionServiceImpl($sessionRepository, $userRepository);
+        $this->pasienService = new PasienServiceImpl($pasienRepository, $pendidikanRepository);
+        $this->pemeriksaanService = new PemeriksaanServiceImpl($pemeriksaanRepository, $pasienRepository);
+        $this->petugasService = new PetugasServiceImpl($petugasRepository);
+        $this->obatService = new ObatServiceImpl($obatRepository);
     }
 
     public function index() :  void

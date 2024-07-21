@@ -6,7 +6,8 @@ use UmamZ\UkppLubangsa\App\View;
 use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Exception\ValidationException;
 use UmamZ\UkppLubangsa\Model\PetugasAddRequest;
-use UmamZ\UkppLubangsa\Repository\PetugasRepository;
+use UmamZ\UkppLubangsa\Repository\Impl\PetugasRepositoryImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PetugasServiceImpl;
 use UmamZ\UkppLubangsa\Service\PetugasService;
 
 class PetugasController
@@ -16,8 +17,8 @@ class PetugasController
     public function __construct()
     {
         $connection = Database::getConnection();
-        $petugasRepository = new PetugasRepository($connection);
-        $this->petugasService = new PetugasService($petugasRepository);
+        $petugasRepository = new PetugasRepositoryImpl($connection);
+        $this->petugasService = new PetugasServiceImpl($petugasRepository);
     }
 
     public function petugas() : void

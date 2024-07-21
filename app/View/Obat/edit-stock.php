@@ -147,8 +147,8 @@
                     <input name="obat" type="text" class="form-control" id="inputObat" value="<?php echo $model['data']->getObat() ?? ''; ?>" disabled>
                   </div>
                   <div class="form-group">
-                    <label for="inputPhoneNumber">Stock</label>
-                    <input name="stock" type="text" class="form-control" id="inputPhoneNumber" value="<?php echo $model['data']->getStock() ?? ''; ?>">
+                    <label for="inputNumber">Stock</label>
+                    <input name="stock" type="number" class="form-control" id="inputNumber" value="<?php echo $model['data']->getStock() ?? ''; ?>">
                   </div>
                 </div>
                 <!-- /.card-body -->

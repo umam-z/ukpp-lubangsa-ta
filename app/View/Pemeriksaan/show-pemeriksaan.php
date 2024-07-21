@@ -199,7 +199,7 @@
                         <select name="petugas" class="form-control">
                           <option value="" disabled selected>Choose option</option>
                           <?php foreach ($model['data']['petugas'] ?? [] as $key => $value) { ?>
-                            <option value="<?= $value->id; ?>"><?= $value->nama; ?></option>
+                            <option value="<?= $value->getId(); ?>"><?= $value->getNama(); ?></option>
                           <?php } ?>
                         </select>
                       </div>

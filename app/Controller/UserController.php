@@ -7,10 +7,12 @@ use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Exception\ValidationException;
 use UmamZ\UkppLubangsa\Model\UserLoginRequest;
 use UmamZ\UkppLubangsa\Model\UserRegisterRequest;
-use UmamZ\UkppLubangsa\Repository\SessionRepository;
-use UmamZ\UkppLubangsa\Repository\UserRepository;
+use UmamZ\UkppLubangsa\Repository\Impl\SessionRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\UserRepositoryImpl;
+use UmamZ\UkppLubangsa\Service\Impl\SessionServiceImpl;
 use UmamZ\UkppLubangsa\Service\SessionService;
 use UmamZ\UkppLubangsa\Service\UserService;
+use UmamZ\UkppLubangsa\Service\UserServiceImpl;
 
 class UserController 
 {
@@ -20,10 +22,10 @@ class UserController
     public function __construct()
     {
         $connection = Database::getConnection();
-        $userRepository = new UserRepository($connection);
-        $sessionRepository = new SessionRepository($connection);
-        $this->userService = new UserService($userRepository);
-        $this->sessionService = new SessionService($sessionRepository, $userRepository);
+        $userRepository = new UserRepositoryImpl($connection);
+        $sessionRepository = new SessionRepositoryImpl($connection);
+        $this->userService = new UserServiceImpl($userRepository);
+        $this->sessionService = new SessionServiceImpl($sessionRepository, $userRepository);
     }
 
     public function register() : void {

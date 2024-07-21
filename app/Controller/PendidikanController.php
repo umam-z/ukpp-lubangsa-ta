@@ -6,7 +6,8 @@ use UmamZ\UkppLubangsa\App\View;
 use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Exception\ValidationException;
 use UmamZ\UkppLubangsa\Model\PendidikanAddRequest;
-use UmamZ\UkppLubangsa\Repository\PendidikanRepository;
+use UmamZ\UkppLubangsa\Repository\Impl\PendidikanRepositoryImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PendidikanServiceImpl;
 use UmamZ\UkppLubangsa\Service\PendidikanService;
 
 class PendidikanController
@@ -16,8 +17,8 @@ class PendidikanController
     public function __construct()
     {
         $connection = Database::getConnection();
-        $pendidikanRepository = new PendidikanRepository($connection);
-        $this->pendidikanService = new PendidikanService($pendidikanRepository);
+        $pendidikanRepository = new PendidikanRepositoryImpl($connection);
+        $this->pendidikanService = new PendidikanServiceImpl($pendidikanRepository);
     }
 
     public function pendidikan() : void

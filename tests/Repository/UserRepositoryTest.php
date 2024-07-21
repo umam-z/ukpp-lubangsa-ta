@@ -24,18 +24,15 @@ class UserRepositoryTest extends TestCase
 
     public function testSave(): void
     {
-        $user = new User;
-        $user->id = mt_rand();
-        $user->nama = 'umam';
-        $user->password = 'tidakada';
+        $user = new User(mt_rand(), 'umam', 'tidakada');
 
         $response = $this->userRepository->save($user);
         
-        $result = $this->userRepository->findById($response->id);
+        $result = $this->userRepository->findById($response->getId());
 
-        self::assertEquals($user->id, $result->id);
-        self::assertEquals($user->nama, $result->nama);
-        self::assertEquals($user->password, $result->password);
+        self::assertEquals($user->getId(), $result->getId());
+        self::assertEquals($user->getNama(), $result->getNama());
+        self::assertEquals($user->getPassword(), $result->getPassword());
     }
 
     public function testFindByIdNotFound()
@@ -52,17 +49,14 @@ class UserRepositoryTest extends TestCase
 
     public function testFindByUsername()
     {
-        $user = new User;
-        $user->id = mt_rand();
-        $user->nama = 'umam';
-        $user->password = 'tidakada';
+        $user = new User(mt_rand(), 'umam', 'tidakada');
 
         $response = $this->userRepository->save($user);
 
-        $result = $this->userRepository->findByUsername($response->nama);
+        $result = $this->userRepository->findByUsername($response->getNama());
 
-        $this->assertEquals($user->id, $result->id);
-        $this->assertEquals($user->nama, $result->nama);
-        $this->assertEquals($user->password, $result->password);
+        $this->assertEquals($user->getId(), $result->getId());
+        $this->assertEquals($user->getNama(), $result->getNama());
+        $this->assertEquals($user->getPassword(), $result->getPassword());
     }
 }

@@ -21,42 +21,36 @@ class SessionRepositoryTest extends TestCase
         $this->sessionRepository->deleteAll();
         $this->userRepository->deleteAll();
 
-        $user = new User;
-        $user->id = 123;
-        $user->nama = 'fulan';
-        $user->password = 'tidakada';
+        $user = new User(123,'fulan','tidakada');
         $this->userRepository->save($user);
     }
     
     public function testSave() : void
     {
-        $session = new Session;
-        $session->id = uniqid();
-        $session->userId = 123;
+        $session = new Session(uniqid(), 123);
+
         $this->sessionRepository->save($session);
 
-        $result = $this->sessionRepository->findById($session->id);
+        $result = $this->sessionRepository->findById($session->getId());
 
 
-        $this->assertEquals($session->id, $result->id);
-        $this->assertEquals($session->userId, $result->userId);
+        $this->assertEquals($session->getId(), $result->getId());
+        $this->assertEquals($session->getUserId(), $result->getUserId());
     }
 
     public function testDeleteByIdSuccess()
     {
-        $session = new Session();
-        $session->id = uniqid();
-        $session->userId = 123;
+        $session = new Session(uniqid(), 123);
 
         $this->sessionRepository->save($session);
 
-        $result = $this->sessionRepository->findById($session->id);
-        self::assertEquals($session->id, $result->id);
-        self::assertEquals($session->userId, $result->userId);
+        $result = $this->sessionRepository->findById($session->getId());
+        self::assertEquals($session->getId(), $result->getId());
+        self::assertEquals($session->getUserId(), $result->getUserId());
 
-        $this->sessionRepository->deleteById($session->id);
+        $this->sessionRepository->deleteById($session->getId());
 
-        $result = $this->sessionRepository->findById($session->id);
+        $result = $this->sessionRepository->findById($session->getId());
         self::assertNull($result);
     }
 

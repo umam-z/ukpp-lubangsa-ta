@@ -6,10 +6,13 @@ use UmamZ\UkppLubangsa\App\View;
 use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Exception\ValidationException;
 use UmamZ\UkppLubangsa\Model\PemeriksaanObatAddRequest;
-use UmamZ\UkppLubangsa\Repository\ObatRepository;
-use UmamZ\UkppLubangsa\Repository\PasienRepository;
-use UmamZ\UkppLubangsa\Repository\PemeriksaanObatRepository;
-use UmamZ\UkppLubangsa\Repository\PemeriksaanRepository;
+use UmamZ\UkppLubangsa\Repository\Impl\ObatRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PasienRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PemeriksaanObatRepositoryImpl;
+use UmamZ\UkppLubangsa\Repository\Impl\PemeriksaanRepositoryImpl;
+use UmamZ\UkppLubangsa\Service\Impl\ObatServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PemeriksaanObatServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\PemeriksaanServiceImpl;
 use UmamZ\UkppLubangsa\Service\ObatService;
 use UmamZ\UkppLubangsa\Service\PemeriksaanObatService;
 use UmamZ\UkppLubangsa\Service\PemeriksaanService;
@@ -22,13 +25,13 @@ class PemeriksaanObatController{
     public function __construct()
     {
         $connection = Database::getConnection();
-        $pemeriksaanRepository = new PemeriksaanRepository($connection);
-        $pasienRepository = new PasienRepository($connection);
-        $obatRepository = new ObatRepository($connection);
-        $pemeriksaanObatRepository = new PemeriksaanObatRepository($connection);
-        $this->pemeriksaanService = new PemeriksaanService($pemeriksaanRepository, $pasienRepository);
-        $this->pemeriksaanObatService = new PemeriksaanObatService($pemeriksaanObatRepository, $pemeriksaanRepository, $obatRepository);
-        $this->obatService = new ObatService($obatRepository);
+        $pemeriksaanRepository = new PemeriksaanRepositoryImpl($connection);
+        $pasienRepository = new PasienRepositoryImpl($connection);
+        $obatRepository = new ObatRepositoryImpl($connection);
+        $pemeriksaanObatRepository = new PemeriksaanObatRepositoryImpl($connection);
+        $this->pemeriksaanService = new PemeriksaanServiceImpl($pemeriksaanRepository, $pasienRepository);
+        $this->pemeriksaanObatService = new PemeriksaanObatServiceImpl($pemeriksaanObatRepository, $pemeriksaanRepository, $obatRepository);
+        $this->obatService = new ObatServiceImpl($obatRepository);
     }
 
     public function pemeriksaanObat(string $pemeriksaanId): void
