@@ -93,29 +93,8 @@ class AlamatRepositoryImpl implements AlamatRepository
         $statement = $this->connection->prepare('SELECT pasien.pasien_id, kabupaten, kecamatan, desa, blok, no, nama, nis FROM pasien join alamat on (alamat.pasien_id = pasien.pasien_id);');
         $statement->execute();
         
-        // $result = [];
-        
-        // foreach ($statement as $row) {
-            
-            //     $pasien = new Pasien();
-            //     $pasien->id = $row['pasien_id'];
-            //     $pasien->nama = $row['nama'];
-            //     $pasien->nis = $row['nis'];
-            
-            //     $alamat = new Alamat;
-            //     $alamat->kabupaten = $row['kabupaten'];
-            //     $alamat->kecamatan = $row['kecamatan'];
-            //     $alamat->desa = $row['desa'];
-            //     $alamat->blok = $row['blok'];
-            //     $alamat->no = $row['no'];
-            
-            //     $result['pasien'] = $pasien;
-            //     $result['alamat'] = $alamat;
-            // }
-            // return $result;
-        
-            $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-            return $result;
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
         
     }
 

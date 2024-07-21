@@ -83,7 +83,7 @@ class PasienController
         try {
             $this->pasienService->delete((int)htmlspecialchars($pasienId));
             View::redirect('/pasien');
-        } catch (\Exception $e) {
+        } catch (ValidationException $e) {
             View::render('/Pasien/show-pasien', [
                 'title' => 'Pasien | UKPP',
                 'error' => $e->getMessage(),

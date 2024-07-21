@@ -15,8 +15,6 @@
   <link rel="stylesheet" href="/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -87,6 +85,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/laporan" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan
+              </p>
+            </a>
+          </li>
           <li class="nav-header">SESSION</li>
           <li class="nav-item">
             <a href="/users/logout" class="nav-link">
@@ -111,7 +117,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Form Pasien</h1>
+            <h1>DataTables</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">DataTables</li>
+            </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -121,88 +133,88 @@
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <!-- general form elements disabled -->
-                <div class="card card-warning">
-                    <div class="card-header">
-                        <h3 class="card-title">General Elements</h3>
-                    </div>
-                <!-- /.card-header -->
-                    <form action="/laporan" method="post">
-                      <div class="card-body">
-                          <div class="row">
-                              <div class="col-sm-6">
-                              <!-- text input -->
-                              <div class="form-group">
-                                  <label>Text</label>
-                                  <input type="date" class="form-control" placeholder="Enter ...">
-                              </div>
-                              </div>
-                              <div class="col-sm-6">
-                              <div class="form-group">
-                                  <label>Text</label>
-                                  <input type="date" class="form-control" placeholder="Enter ..." >
-                              </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!-- /.card-body -->
-                      <!-- card header -->
-                      <div class="card-footer">
-                          <button type="submit" class="btn btn-info">Submit</button>
-                      </div>
-                    </form>
-                    <!-- card footer -->
-                </div>
-            </div>
-        </div>
-        <?php if (isset($model['data']['tgl_dari']) && isset($model['data']['tgl_sampai'])) { ?>
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h3>Laporan dari <?= $model['data']['tgl_dari'] . "sampai " . $model['data']['tgl_sampai'] ?></h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="card">
+          <div class="col-12">
+            <div class="card card-warning">
               <div class="card-header">
-                <h4 class="card-title">Daftar Pasien</h3>
+                  <h3 class="card-title">General Elements</h3>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="laporan" class="table table-bordered">
+              <form action="/laporan" method="post">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Text</label>
+                            <input type="date" name="dari" class="form-control" placeholder="Enter ...">
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Text</label>
+                            <input type="date" name="sampai" class="form-control" placeholder="Enter ..." >
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+                <!-- card header -->
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+              </form>
+              <!-- card footer -->
+            </div>
+            <!-- /.card -->
+             <?php if (isset($model['data'])) { ?>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">DataTable with default features</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
-                      <th>Kode</th>
-                      <th>NIS</th>
                       <th>Nama</th>
+                      <th>Check</th>
+                      <th>Keluhan</th>
+                      <th>Diagnos</th>
                       <th>Kamar</th>
-                      <th>Alamat</th>
-                      <th>Aksi</th>
                     </tr>
                   </thead>
                   <tbody>
-                  <?php foreach ($model['data']['laporan'] as $key => $value) { ?>
+                  <?php foreach ($model['data'] as $key => $value) { ?>
                     <tr>
-                      <td>7878</td>
-                      <td>8989</td>
-                      <td>Ahmad</td>
-                      <td>F7</td>
-                      <td>Ambunten</td>
-                      <td>Test</td>
+                      <td><?= $value['nama'] ?></td>
+                      <td>(T) <?php  echo $value['tensi'] ?> (S) <?php  echo $value['suhu'] ?></td>
+                      <td><?= $value['keluhan'] ?></td>
+                      <td><?= $value['diagnos'] ?></td>
+                      <td><?= $value['blok'] ?> / <?= $value['no'] ?></td>
                     </tr>
                   <?php } ?>
                   </tbody>
-                </table>
+                    <tfoot>
+                    <tr>
+                      <th>Rendering engine</th>
+                      <th>Browser</th>
+                      <th>Platform(s)</th>
+                      <th>Engine version</th>
+                      <th>CSS grade</th>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <!-- /.card-body -->
               </div>
-              <!-- /.card-body -->
-            </div>
+              <?php } ?>
             <!-- /.card -->
           </div>
+          <!-- /.col -->
         </div>
-        <?php } ?>
         <!-- /.row -->
-      </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
@@ -242,27 +254,13 @@
 <script src="/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/assets/dist/js/adminlte.min.js"></script>
+<!-- Page specific script -->
 <script>
   $(function () {
-    $('#laporan').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-
-    // $('#example1').DataTable({
-    //   "paging": true,
-    //   "lengthChange": false,
-    //   "searching": true,
-    //   "ordering": true,
-    //   "info": true,
-    //   "autoWidth": false,
-    //   "responsive": true,
-    // });
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
   });
 </script>
 </body>

@@ -2,7 +2,6 @@
 
 namespace UmamZ\UkppLubangsa\Repository;
 
-use PDO;
 use UmamZ\UkppLubangsa\Domain\Alamat;
 
 interface AlamatRepository

@@ -65,5 +65,6 @@ Router::add('POST', '/periksa/([0-9]*)/obat/([0-9]*)/delete', PemeriksaanObatCon
 
 # Laporan Controller
 Router::add('GET', '/laporan', LaporanController::class, 'laporan',[MustLoginMiddleware::class]);
+Router::add('POST', '/laporan', LaporanController::class, 'postLaporan',[MustLoginMiddleware::class]);
 
 Router::run();

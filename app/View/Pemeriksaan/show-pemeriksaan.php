@@ -87,6 +87,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/laporan" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Laporan
+              </p>
+            </a>
+          </li>
           <li class="nav-header">SESSION</li>
           <li class="nav-item">
             <a href="/users/logout" class="nav-link">
@@ -114,7 +122,7 @@
             <h1>Pemeriksaan</h1>
           </div> -->
           <div class="col-sm-6">
-            <h1>Pasien : <?= $model['data']['pasienperiksa']->nama ?? ''; ?></h1>
+            <h1>Pasien : <?= $model['data']['pasienperiksa']->getNama() ?? ''; ?></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -155,7 +163,7 @@
                         <td><?php  echo $value['tanggal'] ?></td>
                         <td>
                           <div class="btn-group">
-                            <form action="/pasien/<?= $model['data']['pasienperiksa']->id ?? '0'; ?>/periksa/<?php  echo $value['pemeriksaan_id'] ?>/delete" method="post" style="margin: 5px;">
+                            <form action="/pasien/<?= $model['data']['pasienperiksa']->getId() ?? '0'; ?>/periksa/<?php  echo $value['pemeriksaan_id'] ?>/delete" method="post" style="margin: 5px;">
                               <button type="submit" class="btn btn-danger btn-sm">
                                 <i class="far fa-trash-alt"></i>
                               </button>
