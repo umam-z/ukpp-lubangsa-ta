@@ -1,6 +1,6 @@
 <?php
 
-namespace UmamZ\UkppLubangsa\Service;
+namespace UmamZ\UkppLubangsa\Service\Impl;
 
 use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Domain\User;
@@ -11,6 +11,7 @@ use UmamZ\UkppLubangsa\Model\UserLoginResponse;
 use UmamZ\UkppLubangsa\Model\UserRegisterRequest;
 use UmamZ\UkppLubangsa\Model\UserRegisterResponse;
 use UmamZ\UkppLubangsa\Repository\UserRepository;
+use UmamZ\UkppLubangsa\Service\UserService;
 
 class UserServiceImpl implements UserService
 {

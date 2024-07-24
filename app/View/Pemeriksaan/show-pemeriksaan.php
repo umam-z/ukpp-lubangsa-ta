@@ -122,7 +122,7 @@
             <h1>Pemeriksaan</h1>
           </div> -->
           <div class="col-sm-6">
-            <h1>Pasien : <?= $model['data']['pasienperiksa']->getNama() ?? ''; ?></h1>
+            <h1>Pasien : <?= $model['data']['pasienperiksa']->getNama() ?? '' ; ?></h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -193,7 +193,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="post" action="/pasien/<?= $model['data']['pasienperiksa']->id ?? '0'; ?>/periksa">
+                <form method="post" action="/pasien/<?= $model['data']['pasienperiksa']->getId() ?? '0'; ?>/periksa">
 
                   <div class="card-body">
                     <?php if (isset($model['error'])) { ?>

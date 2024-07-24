@@ -117,12 +117,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>DataTables</h1>
+            <h1>Laporan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">DataTables</li>
+              <li class="breadcrumb-item"><a href="/">Home</a></li>
+              <li class="breadcrumb-item active">Laporan</li>
             </ol>
           </div>
         </div>
@@ -136,22 +136,28 @@
           <div class="col-12">
             <div class="card card-warning">
               <div class="card-header">
-                  <h3 class="card-title">General Elements</h3>
+                  <h3 class="card-title">Filter</h3>
               </div>
               <!-- /.card-header -->
               <form action="/laporan" method="post">
                 <div class="card-body">
+                  <?php if (isset($model['error'])) { ?>
+                      <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <?= $model['error']; ?>
+                      </div>
+                    <?php } ?>
                     <div class="row">
                         <div class="col-sm-6">
                         <!-- text input -->
                         <div class="form-group">
-                            <label>Text</label>
+                            <label>Dari</label>
                             <input type="date" name="dari" class="form-control" placeholder="Enter ...">
                         </div>
                         </div>
                         <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Text</label>
+                            <label>Sampai</label>
                             <input type="date" name="sampai" class="form-control" placeholder="Enter ..." >
                         </div>
                         </div>
@@ -169,7 +175,7 @@
              <?php if (isset($model['data'])) { ?>
               <div class="card">
                 <div class="card-header">
-                  <h3 class="card-title">DataTable with default features</h3>
+                  <h3 class="card-title">Data Laporan</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -194,16 +200,7 @@
                     </tr>
                   <?php } ?>
                   </tbody>
-                    <tfoot>
-                    <tr>
-                      <th>Rendering engine</th>
-                      <th>Browser</th>
-                      <th>Platform(s)</th>
-                      <th>Engine version</th>
-                      <th>CSS grade</th>
-                    </tr>
-                    </tfoot>
-                  </table>
+                </table>
                 </div>
                 <!-- /.card-body -->
               </div>

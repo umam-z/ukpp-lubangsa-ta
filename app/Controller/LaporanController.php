@@ -5,6 +5,7 @@ namespace UmamZ\UkppLubangsa\Controller;
 use UmamZ\UkppLubangsa\App\View;
 use UmamZ\UkppLubangsa\Config\Database;
 use UmamZ\UkppLubangsa\Exception\ValidationException;
+use UmamZ\UkppLubangsa\Model\LaporanFindRequest;
 use UmamZ\UkppLubangsa\Repository\Impl\LaporanRepositoryImpl;
 use UmamZ\UkppLubangsa\Service\Impl\LaporanServiceImpl;
 use UmamZ\UkppLubangsa\Service\LaporanService;
@@ -27,19 +28,23 @@ class LaporanController
     
     public function postLaporan() : void
     {
-        $tglAwal = htmlspecialchars($_POST['dari']);
-        $tglAkhir = htmlspecialchars($_POST['sampai']);
+        $request = new LaporanFindRequest;
+        $request->dari = htmlspecialchars($_POST['dari']);
+        $request->sampai= htmlspecialchars($_POST['sampai']);
         try {
             View::render('/Laporan/show-laporan', [
                 'title'=> 'Laporan | UKPP',
-                'data' => $this->laporanService->filterDate($tglAwal, $tglAkhir),
+                'data' => $this->laporanService->filterDate($request),
                 'range' => [
-                    'awal' => $tglAwal,
-                    'akhir' => $tglAkhir
+                    'awal' => $request->dari,
+                    'akhir' => $request->sampai
                 ]
             ]);
-        } catch (ValidationException $th) {
-            
+        } catch (ValidationException $e) {
+            View::render('/Laporan/show-laporan', [
+                'title'=> 'Laporan | UKPP',
+                'error' => 'terjadi kesalahan'
+            ]);
         }
     }
 }

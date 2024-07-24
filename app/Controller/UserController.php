@@ -10,9 +10,9 @@ use UmamZ\UkppLubangsa\Model\UserRegisterRequest;
 use UmamZ\UkppLubangsa\Repository\Impl\SessionRepositoryImpl;
 use UmamZ\UkppLubangsa\Repository\Impl\UserRepositoryImpl;
 use UmamZ\UkppLubangsa\Service\Impl\SessionServiceImpl;
+use UmamZ\UkppLubangsa\Service\Impl\UserServiceImpl;
 use UmamZ\UkppLubangsa\Service\SessionService;
 use UmamZ\UkppLubangsa\Service\UserService;
-use UmamZ\UkppLubangsa\Service\UserServiceImpl;
 
 class UserController 
 {

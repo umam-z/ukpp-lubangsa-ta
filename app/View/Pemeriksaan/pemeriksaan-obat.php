@@ -117,7 +117,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Petugas</h1>
+            <h1>Pemeriksaan Kode : <?= $model['data']['pemeriksaan']->getId() ?></h1>
           </div>
         </div>
       </div>
@@ -134,7 +134,7 @@
              <!-- general form elements -->
              <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add Petugas</h3>
+                <h3 class="card-title">Info</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
@@ -146,10 +146,6 @@
                       <?= $model['error']; ?>
                     </div>
                   <?php } ?>
-                  <div class="form-group">
-                    <label for="inputPemeriksaan">Pmemeriksaan No</label>
-                    <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->getId() ?>" id="inputPemeriksaan" disabled>
-                  </div>
                   <div class="form-group">
                     <label for="inputKeluhan">Keluhan</label>
                     <input type="text" class="form-control" value="<?= $model['data']['pemeriksaan']->getKeluhan() ?>" id="inputKeluhan" disabled>
@@ -164,7 +160,7 @@
                 <div class="card-footer">
                   <?php if (!empty($model['data']['obatperiksa'])) { ?>
                     <form action="/pasien/<?= $model['data']['pemeriksaan']->getPasienId() ?>/surat" method="post" style="margin: 5px;">
-                      <button type="submit" class="btn btn-block btn-primary"><i class="far fa-envelope"></i> Primary</button>
+                      <button type="submit" class="btn btn-block btn-primary"><i class="far fa-envelope"></i> Surat</button>
                     </form>
                   <?php } ?>
                 </div>
@@ -176,14 +172,14 @@
         </div>
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3>Daftar Petugas</h3>
+            <h3>Pengobatan</h3>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Daftar Obat</h3>
+                <h3 class="card-title">Daftar Pengobatan</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -221,7 +217,7 @@
         </div>
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3>Daftar Petugas</h3>
+            <h3>Obat</h3>
           </div>
         </div>
         <div class="row">

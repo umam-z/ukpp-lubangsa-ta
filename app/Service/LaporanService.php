@@ -2,7 +2,9 @@
 
 namespace UmamZ\UkppLubangsa\Service;
 
+use UmamZ\UkppLubangsa\Model\LaporanFindRequest;
+
 interface LaporanService 
 {
-    public function filterDate(string $dari, string $sampai): array;
+    public function filterDate(LaporanFindRequest $request): array;
 }
